@@ -28,7 +28,7 @@ def index():
             result = response.output_text
 
             # Combine the question and response for image prompt
-            image_prompt = f"Create a hyperrealistic photography inspired by the question: '{prompt}' and the response: '{result}'. Give it a slight Latinoamerican and Quebecoise vibe."
+            image_prompt = f"Create a hyperrealistic photography inspired by the question: '{prompt}' and the response: '{result}'. Be inspired by Max Ernst, Hannah Höch, and other artists that developed collage as a way to create illusionistic and surreal compositions. Hyperrealistic, intricate details, dramatic lighting, 8k resolution."
             
             # Generate image using OpenAI Image API
             image_response = openai.OpenAI().images.generate(
