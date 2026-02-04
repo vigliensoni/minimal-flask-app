@@ -16,30 +16,33 @@ def index():
         prompt = request.form["prompt"]
         try:
             # Generate text response using GPT-4o-mini
-            response = openai.chat.completions.create(
-                model="gpt-4o-mini",  
-                messages=[
-                    {"role": "developer", "content": "You are a thorough assistant. Your responses are short and smart. Avoid predictable phrasing."}, 
+            response = openai.responses.create(
+                model="gpt-4.1",  
+                input=[
+                    {"role": "developer", "content": "You are a psychedelic AI that speaks in Oulipian constraints. Respond with surreal and constrained language."}, 
                     {"role": "user", "content": prompt}
                 ],
-                temperature=1.2,
-                max_completion_tokens=50
+                temperature=1.0,
+                max_output_tokens=100
             )
-            result = response.choices[0].message.content
+            result = response.output_text
 
             # Combine the question and response for image prompt
-            image_prompt = f"Create a hyperrealistic photography inspired by the question: '{prompt}' and the response: '{result}'."
+            image_prompt = f"Create a hyperrealistic photography inspired by the question: '{prompt}' and the response: '{result}'. Give it a slight Latinoamerican and Quebecoise vibe."
             
-            # Generate image using DALL·E (OpenAI Image API)
+            # Generate image using OpenAI Image API
             image_response = openai.OpenAI().images.generate(
-                model="dall-e-2",
+                model="gpt-image-1-mini",
                 prompt=image_prompt,
-                size="512x512",
-                quality="standard",
-                n=1,
+                size="1536x1024",
+                quality="medium",
+                # n=1,
             )
-            image_url = image_response.data[0].url
-            print (image_url)
+            image_data = image_response.data[0]
+            if getattr(image_data, "url", None):
+                image_url = image_data.url
+            elif getattr(image_data, "b64_json", None):
+                image_url = f"data:image/png;base64,{image_data.b64_json}"
         except Exception as e:
             result = f"Error: {str(e)}"
     return render_template("index.html", result=result, image_url=image_url)
