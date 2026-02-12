@@ -38,7 +38,11 @@
           </div>
         </div>
         <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+          {% if result[1] %}
           <img src="{{ result[1] }}" alt="Dream Visualization" class="img-fluid rounded" style="max-height: 500px;">
+          {% else %}
+          <div class="alert alert-warning">Image generation pending or unavailable</div>
+          {% endif %}
         </div>
       </div>
       {% endif %}

@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
 import openai
-import requests
 import os
+import json
+import urllib.request
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -31,25 +32,30 @@ Structure your response with clear sections: Symbols, Archetypal Themes, and Psy
     return response.choices[0].message.content
 
 def fetch_dream_image(dream):
-    """Generate dream visualization with Stable Diffusion."""
-    response = requests.post(
-        "https://api.stability.ai/v1/generate",
-        headers={
+    """Generate dream visualization with Stable Diffusion using urllib."""
+    try:
+        url = "https://api.stability.ai/v1/generate"
+        headers = {
             "authorization": f"Bearer {stability_key}",
             "content-type": "application/json",
-        },
-        json={
+        }
+        payload = {
             "text_prompts": [{"text": dream + ", Jungian symbolism, dream-like, surreal, archetypal, unconscious imagery"}],
             "cfg_scale": 7,
             "height": 1024,
             "width": 1024,
             "samples": 1,
             "steps": 30,
-        },
-    )
-    data = response.json()
-    if "artifacts" in data and len(data["artifacts"]) > 0:
-        return f"data:image/png;base64,{data['artifacts'][0]['base64']}"
+        }
+        
+        req = urllib.request.Request(url, data=json.dumps(payload).encode('utf-8'), headers=headers, method='POST')
+        with urllib.request.urlopen(req) as response:
+            data = json.loads(response.read().decode('utf-8'))
+        
+        if "artifacts" in data and len(data["artifacts"]) > 0:
+            return f"data:image/png;base64,{data['artifacts'][0]['base64']}"
+    except Exception as e:
+        print(f"Image generation error: {e}")
     return None
 
 @app.route("/", methods=["GET", "POST"])
