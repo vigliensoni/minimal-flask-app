@@ -5,7 +5,7 @@
 
 For text interpretation, I instructed GPT-4o to act as a Jungian dream analyst. The system prompt explicitly references key Jungian concepts: archetypes (shadow, anima/animus, the self), symbolic interpretation, the collective unconscious, and individuation. 
 
-For image generation, I used Stable Diffusion with a prompt that combines the user's dream description with Jungian keywords: "Jungian symbolism, dream-like, surreal, archetypal" This steers the visual output toward symbolic and psychological content rather than literal illustration.
+For image generation, I used Stable Diffusion with a prompt that combines the user's dream description with Jungian keywords: "Jungian symbolism, dream-like, surreal, archetypal, unconscious imagery" This steers the visual output toward symbolic and psychological content rather than literal illustration.
 
 ### User Guide
 
