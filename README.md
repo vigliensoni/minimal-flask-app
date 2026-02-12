@@ -17,4 +17,4 @@ For image generation, I used Stable Diffusion with a prompt that combines the us
 
 The dual-API approach successfully integrates both objectives: GPT-4o interprets the dream through Jungian theory, while Stable Diffusion visualizes its archetypal content. GPT-4o directly engages with Jung's framework (archetypes, symbolism, individuation), making the analysis rigorous. Stable Diffusion provides fast, cost-efficient image generation with a naturally dreamlike aesthetic that suits Jungian symbolism.
 
-A prompt enhancement with explicit Jungian keywords (archetypal, surreal, unconscious imagery) guides both models toward thematically coherent output. Importantly, using urllib instead of external HTTP libraries keeps dependencies minimal—only Flask, OpenAI, python-dotenv, and gunicorn are required. 
+A prompt enhancement with explicit Jungian keywords (archetypal, surreal, unconscious imagery) guides both models toward thematically coherent output. Importantly, using urllib instead of external HTTP libraries keeps dependencies minimal. Only Flask, OpenAI, python-dotenv, and gunicorn are required. 
