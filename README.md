@@ -1,20 +1,49 @@
 # CART498 (GenAI)
 ## Assignment 4 - Jungian Dream Interpreter
 
-### Jungian Concepts in Prompt Engineering
+This is a minimal Flask app that takes a dream description, generates a Jungian analysis with GPT-4o, and optionally renders a dream-like image using the Stability API.
 
-For text interpretation, I instructed GPT-4o to act as a Jungian dream analyst. The system prompt explicitly references key Jungian concepts: archetypes (shadow, anima/animus, the self), symbolic interpretation, the collective unconscious, and individuation. 
+**Entry Point**
+`app.py`
 
-For image generation, I used Stable Diffusion with a prompt that combines the user's dream description with Jungian keywords: "Jungian symbolism, dream-like, surreal, archetypal, unconscious imagery" This steers the visual output toward symbolic and psychological content rather than literal illustration.
+## Setup
 
-### User Guide
+1. Create a virtual environment and install dependencies:
 
-1. **Input**: Describe your dream in as much detail as possible: emotions, people, settings, colors, and recurring symbols.
-2. **Output**: The app generates two interpretations: a textual Jungian analysis identifying archetypes and symbolic meaning, plus a visual representation of the dream's psychological themes.
-3. **Interaction**: Press Enter (without Shift) or click Interpret to submit.
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-### Reflection
+2. Create a `.env` file with required API keys:
 
-The dual-API approach successfully integrates both objectives: GPT-4o interprets the dream through Jungian theory, while Stable Diffusion visualizes its archetypal content. GPT-4o directly engages with Jung's framework (archetypes, symbolism, individuation), making the analysis rigorous. Stable Diffusion provides fast, cost-efficient image generation with a naturally dreamlike aesthetic that suits Jungian symbolism.
+```bash
+OPENAI_API_KEY=your_openai_key
+STABILITY_API_KEY=your_stability_key
+```
 
-A prompt enhancement with explicit Jungian keywords (archetypal, surreal, unconscious imagery) guides both models toward thematically coherent output. Importantly, using urllib instead of external HTTP libraries keeps dependencies minimal. Only Flask, OpenAI, python-dotenv, and gunicorn are required. 
+## Run
+
+### Development (Flask built-in)
+
+```bash
+python app.py
+```
+
+The app will be available at `http://127.0.0.1:5000`.
+
+### Production (Gunicorn)
+
+```bash
+gunicorn app:app
+```
+
+## Tests
+
+There is no automated test suite in this repository yet. If you add tests later, include them under a `tests/` directory and document the command here (for example, `pytest`).
+
+## Notes
+
+- The Flask route is defined in `app.py`.
+- The UI template lives at `templates/index.html`.
